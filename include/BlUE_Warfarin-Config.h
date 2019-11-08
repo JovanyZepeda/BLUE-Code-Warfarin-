@@ -53,7 +53,7 @@ vex::controller Controller1 = vex::controller();
 
 // define your global instances of motors and other devices here
 
-vex::motor FrontLeft        = vex::motor( vex::PORT11 );
+vex::motor FrontLeft        = vex::motor( vex::PORT11);
 vex::motor FrontRight       = vex::motor( vex::PORT1); //Add true to reverse the direction of right motor
 vex::motor BackLeft         = vex::motor( vex::PORT19 );
 vex::motor BackRight        = vex::motor( vex::PORT20,  true);
@@ -61,9 +61,9 @@ vex::motor BackRight        = vex::motor( vex::PORT20,  true);
 
 //Scoring Mechanism
 vex::motor LeftArm          = vex::motor( vex::PORT3);
-vex::motor RightArm         = vex::motor( vex::PORT8);
+vex::motor RightArm         = vex::motor( vex::PORT8, true);
 vex::motor LeftIntakeMotor  = vex::motor( vex::PORT14);
-vex::motor RightIntakeMotor = vex::motor( vex::PORT13);
+vex::motor RightIntakeMotor = vex::motor( vex::PORT12);
 vex::motor AnglerMotor      = vex::motor( vex::PORT15);
 
 
@@ -72,5 +72,6 @@ vex::sonar Sonar            = vex::sonar(Brain.ThreeWirePort.B);
 vex::gyro Gyro              = vex::gyro(Brain.ThreeWirePort.A);
 vex::bumper AnglerBumper    = vex::bumper(Brain.ThreeWirePort.C);
 vex::bumper AnglerBumperFront    = vex::bumper(Brain.ThreeWirePort.D);
+
 
 #endif CONFIG //End of the definition of Config

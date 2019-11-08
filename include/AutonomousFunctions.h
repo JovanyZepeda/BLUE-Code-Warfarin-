@@ -22,13 +22,7 @@ void DriveReset(){
 
 
 void DriveFoward ( double X ){
- for(int accel=0; accel<=MotorVelocity; accel+=5){ 
-    BackLeft.spin(vex::directionType::fwd,accel,vex::velocityUnits::pct);
-    BackRight.spin(vex::directionType::fwd,accel,vex::velocityUnits::pct);
-    FrontLeft.spin(vex::directionType::fwd,accel,vex::velocityUnits::pct);
-    FrontRight.spin(vex::directionType::fwd,accel,vex::velocityUnits::pct);
-    vex::task::sleep(50);
- }
+ 
 
     
     BackLeft.rotateFor(X * DegreesToRotate,vex::rotationUnits::deg,MotorVelocity,vex::velocityUnits::pct,false);
