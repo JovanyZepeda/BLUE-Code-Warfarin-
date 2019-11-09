@@ -38,7 +38,7 @@ void Autonomous(void){
 
     Intake(1);
     DriveFoward(1.5);
-    task::sleep(1000);
+    wait(1, timeUnits::sec);
     //DriveRotate(90);
     PIDGyroRotate(140);
     Intake(0);
