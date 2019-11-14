@@ -32,22 +32,21 @@ void DetectCube(){
 void Autonomous(void){
     
    Pre_auton();
-   Intake(1);
-   vex::task::sleep(2000);
-    
+   Intake(1, 75);
+   wait(1, timeUnits, sec);
 
-    Intake(1);
-    DriveFoward(1.5);
-    wait(1, timeUnits::sec);
+    Intake(1, 75);
+    DriveFoward(2.5);
+    wait(2, timeUnits::sec);
     //DriveRotate(90);
     PIDGyroRotate(140);
-    Intake(0);
+    Intake(0, 0);
     DriveFoward(1.25);
-    Intake(-1);
+    Intake(-1, 75);
     //AnglerAuto(3.7);
-    task::sleep(2000);
+   wait(1, timeUnits, sec);
     DriveReverse(1);
-    Intake(0);
+    Intake(0, 0);
     
 }
 /**************************************************************************************************************************************
@@ -123,6 +122,16 @@ void Intake(){
         LeftIntakeMotor.stop(vex::brakeType::hold);
         RightIntakeMotor.stop(vex::brakeType::hold);
     }
+   /* if (Controller1.ButtonR1.pressing()){
+        LeftIntakeMotor.spin(vex::directionType::fwd, IntakeMotorVelocity, vex::velocityUnits::pct);
+        RightIntakeMotor.spin(vex::directionType::rev, IntakeMotorVelocity, vex::velocityUnits::pct);
+    } else if(Controller1.ButtonR2.pressing()){
+        LeftIntakeMotor.spin(vex::directionType::rev, IntakeMotorVelocity, vex::velocityUnits::pct);
+        RightIntakeMotor.spin(vex::directionType::fwd, IntakeMotorVelocity, vex::velocityUnits::pct);
+    } else {
+        LeftIntakeMotor.stop(vex::brakeType::hold);
+        RightIntakeMotor.stop(vex::brakeType::hold);
+    } */
 }
 
 
