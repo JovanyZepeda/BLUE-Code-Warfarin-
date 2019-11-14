@@ -62,8 +62,8 @@ vex::motor BackRight        = vex::motor( vex::PORT20,  true);
 //Scoring Mechanism
 vex::motor LeftArm          = vex::motor( vex::PORT3);
 vex::motor RightArm         = vex::motor( vex::PORT8, true);
-vex::motor LeftIntakeMotor  = vex::motor( vex::PORT16);
-vex::motor RightIntakeMotor = vex::motor( vex::PORT12);
+vex::motor LeftIntakeMotor  = vex::motor( vex::PORT14);
+vex::motor RightIntakeMotor = vex::motor( vex::PORT16);
 vex::motor AnglerMotor      = vex::motor( vex::PORT4);
  
 
@@ -72,5 +72,7 @@ vex::sonar Sonar            = vex::sonar(Brain.ThreeWirePort.B);
 vex::gyro Gyro              = vex::gyro(Brain.ThreeWirePort.A);
 vex::bumper AnglerBumper    = vex::bumper(Brain.ThreeWirePort.C);
 vex::bumper AnglerBumperFront    = vex::bumper(Brain.ThreeWirePort.D);
+vex::bumper RightArmBumper       = vex::bumper(Brain.ThreeWirePort.E);
+vex::bumper LeftArmBumper        = vex::bumper(Brain.ThreeWirePort.F);
 
 #endif CONFIG //End of the definition of Config
