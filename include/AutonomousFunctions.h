@@ -16,8 +16,8 @@ using namespace vex;
 void DriveReset(){
     BackLeft.resetRotation();
     BackRight.resetRotation();
-    FrontLeft.resetRotation();
-    FrontRight.resetRotation();
+    //FrontLeft.resetRotation();
+    //FrontRight.resetRotation();
 }
 
 
@@ -27,8 +27,8 @@ void DriveFoward ( double X ){
     
     BackLeft.rotateFor(X * DegreesToRotate,vex::rotationUnits::deg,MotorVelocity,vex::velocityUnits::pct,false);
     BackRight.rotateFor(X * DegreesToRotate,vex::rotationUnits::deg,MotorVelocity,vex::velocityUnits::pct,false);
-    FrontLeft.rotateFor(X * DegreesToRotate,vex::rotationUnits::deg,MotorVelocity,vex::velocityUnits::pct,false);
-    FrontRight.rotateFor(X * DegreesToRotate,vex::rotationUnits::deg,MotorVelocity,vex::velocityUnits::pct);
+   // FrontLeft.rotateFor(X * DegreesToRotate,vex::rotationUnits::deg,MotorVelocity,vex::velocityUnits::pct,false);
+   // FrontRight.rotateFor(X * DegreesToRotate,vex::rotationUnits::deg,MotorVelocity,vex::velocityUnits::pct);
     }
 
 
@@ -52,9 +52,9 @@ void Intake(int option){
 void DriveReverse ( double X ){
     
     BackLeft.rotateFor(-X * DegreesToRotate,vex::rotationUnits::deg,MotorVelocity,vex::velocityUnits::pct,false);
-    BackRight.rotateFor(-X * DegreesToRotate,vex::rotationUnits::deg,MotorVelocity,vex::velocityUnits::pct,false);
-    FrontLeft.rotateFor(-X * DegreesToRotate,vex::rotationUnits::deg,MotorVelocity,vex::velocityUnits::pct, false);
-    FrontRight.rotateFor(-X * DegreesToRotate,vex::rotationUnits::deg,MotorVelocity,vex::velocityUnits::pct);
+    BackRight.rotateFor(-X * DegreesToRotate,vex::rotationUnits::deg,MotorVelocity,vex::velocityUnits::pct);
+  //  FrontLeft.rotateFor(-X * DegreesToRotate,vex::rotationUnits::deg,MotorVelocity,vex::velocityUnits::pct, false);
+  //  FrontRight.rotateFor(-X * DegreesToRotate,vex::rotationUnits::deg,MotorVelocity,vex::velocityUnits::pct);
 }
 
 void DriveLeft( double X ){
@@ -82,9 +82,9 @@ void DriveRotate( double Theta ){
     DegreesToRevolve = ((360 * ((RadiusRobotCM) * (Theta * (PI)/(180)))/(CircumferenceCM)) * GearRatio );
     
     BackLeft.rotateFor(DegreesToRevolve,vex::rotationUnits::deg,MotorVelocity,vex::velocityUnits::pct,false);
-    BackRight.rotateFor(-DegreesToRevolve,vex::rotationUnits::deg,MotorVelocity,vex::velocityUnits::pct,false);
-    FrontLeft.rotateFor(DegreesToRevolve,vex::rotationUnits::deg,MotorVelocity,vex::velocityUnits::pct,false);
-    FrontRight.rotateFor(-DegreesToRevolve,vex::rotationUnits::deg,MotorVelocity,vex::velocityUnits::pct);
+    BackRight.rotateFor(-DegreesToRevolve,vex::rotationUnits::deg,MotorVelocity,vex::velocityUnits::pct);
+  //  FrontLeft.rotateFor(DegreesToRevolve,vex::rotationUnits::deg,MotorVelocity,vex::velocityUnits::pct,false);
+  //  FrontRight.rotateFor(-DegreesToRevolve,vex::rotationUnits::deg,MotorVelocity,vex::velocityUnits::pct);
 }
 
 // These allow robot to move diagnolly
@@ -119,15 +119,15 @@ void DriveBackLeftDiagnol( double X ){
 void DriveStop(){
     BackLeft.stop(vex::brakeType::coast);
     BackRight.stop(vex::brakeType::coast);
-    FrontLeft.stop(vex::brakeType::coast);
-    FrontRight.stop(vex::brakeType::coast);
+    //FrontLeft.stop(vex::brakeType::coast);
+    //FrontRight.stop(vex::brakeType::coast);
 }
 
 void Pre_auton(){  
     BackLeft.resetRotation();
     BackRight.resetRotation();
-    FrontLeft.resetRotation();
-    FrontRight.resetRotation();    
+//FrontLeft.resetRotation();
+  //  FrontRight.resetRotation();    
 }
 
 

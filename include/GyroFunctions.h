@@ -50,10 +50,10 @@ void PIDGyroRotate( double TargetDeg ){
         //DTR is the amount of degrees that the shaft must turn to reach targetDeg
 
         BackLeft.rotateFor(DTR,vex::rotationUnits::deg,MotorVelocity,vex::velocityUnits::pct,false);
-        BackRight.rotateFor(-DTR,vex::rotationUnits::deg,MotorVelocity,vex::velocityUnits::pct, false);
-        FrontLeft.rotateFor(DTR,vex::rotationUnits::deg,MotorVelocity,vex::velocityUnits::pct,false);
-        FrontRight.rotateFor(-DTR,vex::rotationUnits::deg,MotorVelocity,vex::velocityUnits::pct);
-     //vex::task::sleep(50);
+        BackRight.rotateFor(-DTR,vex::rotationUnits::deg,MotorVelocity,vex::velocityUnits::pct);
+        //FrontLeft.rotateFor(DTR,vex::rotationUnits::deg,MotorVelocity,vex::velocityUnits::pct,false);
+        //FrontRight.rotateFor(-DTR,vex::rotationUnits::deg,MotorVelocity,vex::velocityUnits::pct);
+        //vex::task::sleep(50);
 
     }      
 }
