@@ -33,25 +33,25 @@ void Autonomous(void){
     
    Pre_auton();
    Intake(1, 75);
-   wait(1, timeUnits, sec);
+   wait(1, timeUnits::sec);
 
-<<<<<<< HEAD
-    Intake(1);
+
+    Intake(1, 75);
     DriveFoward(1.5);
     wait(1, timeUnits::sec);
     
-=======
+
     Intake(1, 75);
     DriveFoward(2.5);
     wait(2, timeUnits::sec);
->>>>>>> 252bcda2535b2101b69f24e0971e5594daf447ea
+
     //DriveRotate(90);
     PIDGyroRotate(140);
     Intake(0, 0);
     DriveFoward(1.25);
     Intake(-1, 75);
     //AnglerAuto(3.7);
-   wait(1, timeUnits, sec);
+   wait(1, timeUnits::sec);
     DriveReverse(1);
     Intake(0, 0);
     
