@@ -31,27 +31,23 @@ void DetectCube(){
 *************************************************************************************************************************************/
 void Autonomous(void){
     
+   
+  vex::wait(2, timeUnits::sec);
    Pre_auton();
    Intake(1, 75);
-   wait(1, timeUnits::sec);
-
-
-    Intake(1, 75);
-    DriveFoward(1.5);
-    wait(1, timeUnits::sec);
+   vex::wait(2, timeUnits::sec);
     
 
     Intake(1, 75);
-    DriveFoward(2.5);
-    wait(2, timeUnits::sec);
-
+    DriveFoward(1.5);
+    task::sleep(1000);
     //DriveRotate(90);
-    PIDGyroRotate(140);
+    PIDGyroRotate(-140);
     Intake(0, 0);
     DriveFoward(1.25);
-    Intake(-1, 75);
+    Intake(-1, 100);
     //AnglerAuto(3.7);
-   wait(1, timeUnits::sec);
+    task::sleep(2000);
     DriveReverse(1);
     Intake(0, 0);
     
