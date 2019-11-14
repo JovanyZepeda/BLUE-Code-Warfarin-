@@ -32,8 +32,8 @@ void DriveFoward ( double X ){
     }
 
 
-void Intake(int option){
-  if (option ==1)
+void Intake(int option, int speed){
+  /*if (option ==1)
         {
           LeftIntakeMotor.spin(vex::directionType::fwd, IntakeMotorVelocity, vex::velocityUnits::pct);
           RightIntakeMotor.spin(vex::directionType::rev, IntakeMotorVelocity, vex::velocityUnits::pct);
@@ -45,8 +45,23 @@ void Intake(int option){
                   {
                     LeftIntakeMotor.stop(brakeType::hold);
                     RightIntakeMotor.stop(brakeType::hold);
-                  }
-}
+                  }*/
+      if (option ==1)
+      {
+          LeftIntakeMotor.spin(vex::directionType::fwd, speed, vex::velocityUnits::pct);
+          RightIntakeMotor.spin(vex::directionType::rev, speed, vex::velocityUnits::pct);
+         } 
+      else if(option == -1)
+          {   
+            LeftIntakeMotor.spin(vex::directionType::rev, speed, vex::velocityUnits::pct);
+            RightIntakeMotor.spin(vex::directionType::fwd, speed, vex::velocityUnits::pct);
+          }
+      else if(option ==0)
+          {
+              LeftIntakeMotor.stop(brakeType::hold);
+              RightIntakeMotor.stop(brakeType::hold);
+          }
+      }
 
 
 void DriveReverse ( double X ){
