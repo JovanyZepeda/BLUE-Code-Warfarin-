@@ -23,16 +23,17 @@
 
 
 
+
 //  Variables
     #define PI 3.141592
     double WheelDiameterCM = 10.16;
     double CircumferenceCM = PI * WheelDiameterCM;
     double TravelTargetCM = 60; 
-    double GearRatio = 1.66667;
+    double GearRatio = 1;
     double DegreesToRotate = (360 * (TravelTargetCM/CircumferenceCM) * GearRatio);
-    double MotorVelocity = 50; 
-    double ArmMotorVelocity = 30;
-    double RadiusRobotCM = 33.5; // This is equal the distance of the center of one wheel to the center of the wheel on the other side
+    double MotorVelocity = 40; 
+    double ArmMotorVelocity = 60;
+    double RadiusRobotCM = 33/2 ; // This is equal the distance of the center of one wheel to the center of the wheel on the other side
     double DegreesToRevolve;
     double IntakeMotorVelocity = 100;
     double AnglerMotorSpeed = 30;
@@ -69,10 +70,11 @@ vex::motor AnglerMotor      = vex::motor( vex::PORT4);
 
 //Devices
 vex::sonar Sonar            = vex::sonar(Brain.ThreeWirePort.B);
-vex::gyro Gyro              = vex::gyro(Brain.ThreeWirePort.A);
-vex::bumper AnglerBumper    = vex::bumper(Brain.ThreeWirePort.C);
-vex::bumper AnglerBumperFront    = vex::bumper(Brain.ThreeWirePort.D);
+vex::gyro Gyro              = vex::gyro(Brain.ThreeWirePort.A);  
+vex::bumper AnglerBumperBack    = vex::bumper(Brain.ThreeWirePort.D);
+vex::bumper AnglerBumperFront    = vex::bumper(Brain.ThreeWirePort.C);
 vex::bumper RightArmBumper       = vex::bumper(Brain.ThreeWirePort.E);
 vex::bumper LeftArmBumper        = vex::bumper(Brain.ThreeWirePort.F);
+
 
 #endif CONFIG //End of the definition of Config

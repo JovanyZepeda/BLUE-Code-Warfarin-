@@ -39,16 +39,16 @@ void Autonomous(void){
     
 
     Intake(1, 75);
-    DriveFoward(1.5);
+    DriveFoward(1.5, 40);
     task::sleep(1000);
     //DriveRotate(90);
     PIDGyroRotate(-140);
     Intake(0, 0);
-    DriveFoward(1.25);
+    DriveFoward(1.25, 40);
     Intake(-1, 100);
     //AnglerAuto(3.7);
     task::sleep(2000);
-    DriveReverse(1);
+    DriveReverse(1, 40);
     Intake(0, 0);
     
 }
@@ -92,25 +92,86 @@ void Drive(int mode){
     vex::task::sleep(20);
 }
 
+}
 
 
+
+void MoveRamp(){
+
+//this will set the ramp at the right position for rading the arms. This will also reset the ramp
+//from any position, back to the intake position
+
+  if(Controller1.ButtonA.pressing() == true && AnglerBumperFront.pressing()== true){ //foward if: it is in the intaking position
+
+      AnglerMotor.rotateFor(directionType::fwd, 2, rotationUnits::rev, 100, velocityUnits::pct);
+  } 
+
+  if(Controller1.ButtonY.pressing() == true && LeftArmBumper.pressing() == true ){ //reset ramp if: the arms are fully down/lowered
+
+      do{ 
+      AnglerMotor.spin(directionType::rev, 200, percentUnits::pct); 
+      } while (AnglerBumperFront.pressing()==false); //this will move the angler moter back until it presses the from bump switch(intake position)
+
+
+  }
 
 }
 
 
 
+
+
+
+
 void Arms(){
-  
-    if ( Controller1.ButtonUp.pressing()){
-       LeftArm.spin(vex::directionType::fwd, ArmMotorVelocity, vex::velocityUnits::pct);
+
+/*
+This function will operate the arms motors; it used two bummp switches to sense if the arms are already in the intake position. 
+This is also a way to recallibrate the arms if they get mis-aligned. 
+*/
+
+
+    if ( Controller1.ButtonUp.pressing() && AnglerBumperFront.pressing() == false){ //check is button up is pressed and that anlger is not in intake position
+
+        LeftArm.spin(vex::directionType::fwd, ArmMotorVelocity, vex::velocityUnits::pct);
         RightArm.spin(vex::directionType::fwd, ArmMotorVelocity, vex::velocityUnits::pct);
-    } else if(Controller1.ButtonDown.pressing()){
-       LeftArm.spin(vex::directionType::rev, ArmMotorVelocity, vex::velocityUnits::pct);
-        RightArm.spin(vex::directionType::rev, ArmMotorVelocity, vex::velocityUnits::pct);
+   
+    } else if(Controller1.ButtonDown.pressing()){ // check is the button down is pressed => Move arms down if....
+
+
+        if(RightArmBumper.pressing() == false && LeftArmBumper.pressing() == false) // Move both arms down at same time
+        { 
+
+          LeftArm.spin(vex::directionType::rev, ArmMotorVelocity, vex::velocityUnits::pct);
+          RightArm.spin(vex::directionType::rev, ArmMotorVelocity, vex::velocityUnits::pct);
+      
+        } else if(RightArmBumper.pressing()==false && LeftArmBumper.pressing() == true){ // if left bumper is pressed, only move the right arm down
+        
+          LeftArm.setBrake(brakeType::coast);
+          RightArm.spin(vex::directionType::rev, ArmMotorVelocity, vex::velocityUnits::pct);
+      
+        } else if(RightArmBumper.pressing()== true && LeftArmBumper.pressing() == false){ //if right bumper is pressed, only move the left arm down
+        
+          RightArm.setBrake(brakeType::coast);
+          LeftArm.spin(vex::directionType::rev, ArmMotorVelocity, vex::velocityUnits::pct
+          );
+      
+        } else if(RightArmBumper.pressing() == true && LeftArmBumper.pressing() == true){ //if both arm buttons are pressed, stop them from rotating
+
+          RightArm.setBrake(brakeType::coast);
+          LeftArm.setBrake(brakeType::coast);
+
+        }
+
+
+
     } else {
-       LeftArm.stop(vex::brakeType::hold);
+
+        LeftArm.stop(vex::brakeType::hold);
         RightArm.stop(vex::brakeType::hold);
+
     }
+  
     
 }
 
@@ -125,40 +186,32 @@ void Intake(){
         LeftIntakeMotor.stop(vex::brakeType::hold);
         RightIntakeMotor.stop(vex::brakeType::hold);
     }
-   /* if (Controller1.ButtonR1.pressing()){
-        LeftIntakeMotor.spin(vex::directionType::fwd, IntakeMotorVelocity, vex::velocityUnits::pct);
-        RightIntakeMotor.spin(vex::directionType::rev, IntakeMotorVelocity, vex::velocityUnits::pct);
-    } else if(Controller1.ButtonR2.pressing()){
-        LeftIntakeMotor.spin(vex::directionType::rev, IntakeMotorVelocity, vex::velocityUnits::pct);
-        RightIntakeMotor.spin(vex::directionType::fwd, IntakeMotorVelocity, vex::velocityUnits::pct);
-    } else {
-        LeftIntakeMotor.stop(vex::brakeType::hold);
-        RightIntakeMotor.stop(vex::brakeType::hold);
-    } */
 }
 
 
 
 void Angler(){
-        if(AnglerBumper.pressing() == false){
+
+  //this function will allow user to operate the angler to move the ramp
+    if(AnglerBumperBack.pressing() == false){ //check if the ramp is not already it its maximum foward position for stacking
       if (Controller1.ButtonL1.pressing())
           {
             AnglerMotor.spin(vex::directionType::fwd, AnglerMotorSpeed, vex::velocityUnits::pct);
           
 
-      } else if(Controller1.ButtonL2.pressing()){
+      } else if(Controller1.ButtonL2.pressing() && LeftArmBumper.pressing() == true){ //move ramp back only if the arms are down and lowered
           AnglerMotor.spin(vex::directionType::rev, 100, vex::velocityUnits::pct);
 
       } else {
-          AnglerMotor.stop(vex::brakeType::hold);
+          AnglerMotor.stop(vex::brakeType::hold); //hold the position of the ramp
 
       } 
 
     }
 
 
-    if(AnglerBumper.pressing() == true){
-      if (Controller1.ButtonL1.pressing())
+    if(AnglerBumperFront.pressing() == true){ //if the ramp is already in minumum position (intakeing)...
+      if (Controller1.ButtonL1.pressing()) //move ramp back
           {
             AnglerMotor.spin(vex::directionType::fwd, AnglerMotorSpeed, vex::velocityUnits::pct);
           
@@ -172,8 +225,8 @@ void Angler(){
 
 
     
-    if(AnglerBumperFront.pressing() == true){
-      if (Controller1.ButtonL2.pressing())
+    if(AnglerBumperBack.pressing() == true){ //if the ramp is already in the maximum foward position for stacking
+      if (Controller1.ButtonL2.pressing()) //only allow the ramp to move back
           {
             AnglerMotor.spin(vex::directionType::rev, 100, vex::velocityUnits::pct);
           
@@ -183,6 +236,7 @@ void Angler(){
 
       } 
     }
+
 
 }
 
@@ -200,6 +254,7 @@ void UserControl(void){
                 Drive(0);
                 Arms();
                 Intake(); 
+                MoveRamp();
                 //DetectCube();
                 Angler();
             } else if(Controller1.ButtonB.pressing() ==true){ 
@@ -218,4 +273,4 @@ int main() {
  Competition.autonomous(Autonomous);
  Competition.drivercontrol(UserControl);
     vex::task::sleep(100);
-}
+} 
