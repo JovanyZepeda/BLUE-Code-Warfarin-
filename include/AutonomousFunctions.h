@@ -15,12 +15,25 @@ using namespace vex;
 
 
 
-void AnglerAuto(double Revolutions, int speedPct)
+void AnglerAuto(int Config, double Revolutions, int speedPct) // if config =1, set angler to stacking position
+                                                              //if config = -1, set anlger to intake position
 {
+    if(Config ==0 ){
+    
+    AnglerMotor.rotateFor(directionType::undefined,  Revolutions, rotationUnits::rev, speedPct, velocityUnits::pct);
+    } else if(Config == 1){
+        do{
+          AnglerMotor.spin(directionType::fwd, speedPct, velocityUnits::pct); 
+        } while (AnglerBumperBack.pressing() == false);
 
-  AnglerMotor.rotateFor(directionType::undefined,  Revolutions, rotationUnits::rev, speedPct, velocityUnits::pct);
+    } else if(Config == -1){
 
-  // AnglerMotor.spinFor(time, vex::timeUnits::sec, 100, vex::velocityUnits::pct);
+        do{
+          AnglerMotor.spin(directionType::rev, speedPct, velocityUnits::pct); 
+        } while (AnglerBumperFront.pressing() == false);
+    
+    }
+  
 
 }
 
