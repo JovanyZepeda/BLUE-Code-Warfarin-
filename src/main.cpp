@@ -31,25 +31,58 @@ void DetectCube(){
 *************************************************************************************************************************************/
 void Autonomous(void){
     
-   
-  vex::wait(2, timeUnits::sec);
+//adjust gyro
+   wait(2, timeUnits::sec);
    Pre_auton();
-   Intake(1, 75);
-   vex::wait(2, timeUnits::sec);
+   Intake(1, 80);
+  // vex::wait(2, timeUnits::sec);
     
 
-    Intake(1, 75);
-    DriveFoward(1.5, 40);
-    task::sleep(1000);
+  //  Intake(1);
+    DriveFoward(4, 40); //collect 2 cubes
+    //task::sleep(1000);
+    DriveReset();
+    DriveReverse(2.6, 45);
     //DriveRotate(90);
-    PIDGyroRotate(-140);
     Intake(0, 0);
-    DriveFoward(1.25, 40);
-    Intake(-1, 100);
-    //AnglerAuto(3.7);
-    task::sleep(2000);
-    DriveReverse(1, 40);
+    PIDGyroRotate(-135);
+/*if it doesn't work, gyro either makes robot spin forever, 
+or rotates to position then stops function altogether
+*/
+    Intake(-1, 45);
+    wait(500, timeUnits::msec);
+    Intake(1, 75); //adjust
     Intake(0, 0);
+
+    DriveFoward(.75, 50);
+
+    AnglerAuto(0, 2, 60); 
+
+    Intake(-1, 50);
+    wait(500, timeUnits::msec);
+    Intake(-1, 30);
+
+    AnglerAuto(1, 0, 40); //stack
+    Intake(0, 0);
+    DriveFoward(.15, 20);
+    DriveReset();
+    wait(500, timeUnits::msec);
+    Intake(-1, 5);
+    DriveReverse(2, 100);
+    Intake(0, 0);
+ 
+    //
+    //Intake(0);
+    
+
+    /*
+     DriveFoward(1.2, 30);
+      
+    wait(500, timeUnits::msec);
+    DriveReverse(1.2, 70);
+    */
+
+  
     
 }
 /**************************************************************************************************************************************

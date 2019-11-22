@@ -63,8 +63,8 @@ vex::motor BackRight        = vex::motor( vex::PORT20,  true);
 //Scoring Mechanism
 vex::motor LeftArm          = vex::motor( vex::PORT3);
 vex::motor RightArm         = vex::motor( vex::PORT8, true);
-vex::motor LeftIntakeMotor  = vex::motor( vex::PORT14);
-vex::motor RightIntakeMotor = vex::motor( vex::PORT16);
+vex::motor LeftIntakeMotor  = vex::motor( vex::PORT14, true);
+vex::motor RightIntakeMotor = vex::motor( vex::PORT16, true);
 vex::motor AnglerMotor      = vex::motor( vex::PORT4);
  
 
