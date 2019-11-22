@@ -34,17 +34,20 @@ void Autonomous(void){
 //adjust gyro
    wait(2, timeUnits::sec);
    Pre_auton();
-   Intake(1, 80);
+   Intake(1, 75);
   // vex::wait(2, timeUnits::sec);
     
 
   //  Intake(1);
     DriveFoward(4, 40); //collect 2 cubes
     //task::sleep(1000);
+
+    Intake(0, 0);
     DriveReset();
     DriveReverse(2.6, 45);
     //DriveRotate(90);
     Intake(0, 0);
+    wait(500, timeUnits::msec);
     PIDGyroRotate(-135);
 /*if it doesn't work, gyro either makes robot spin forever, 
 or rotates to position then stops function altogether
