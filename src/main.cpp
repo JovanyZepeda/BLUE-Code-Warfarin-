@@ -31,7 +31,7 @@ void DetectCube(){
 *************************************************************************************************************************************/
 void Autonomous(void){
    Brain.Screen.setFillColor(blue); 
-  Brain.Screen.drawRectangle(1, 1, 480, 272);  
+  Brain.Screen.drawRectangle(0, 0, 480, 272);  
   
 
 
