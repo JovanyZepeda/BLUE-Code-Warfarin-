@@ -30,58 +30,57 @@ void DetectCube(){
 
 *************************************************************************************************************************************/
 void Autonomous(void){
-    
-//adjust gyro
-   wait(1, timeUnits::sec);
+   Brain.Screen.setFillColor(blue); 
+  Brain.Screen.drawRectangle(1, 1, 480, 272);  
+  
+
+
+   wait(.5, timeUnits::sec);
    Pre_auton();
-   Intake(1, 75);
-  // vex::wait(2, timeUnits::sec);
-    
 
-  //  Intake(1);
-    DriveFoward(3.75, 30); //collect 2 cubes
-    //task::sleep(1000);
 
+
+    Intake(1, 75);
+    DriveFoward(3.75, 30); //collect four cubes in front of the robot
+
+    //This will reverse the robot back and into the small goalzone
     Intake(0, 0);
     DriveReset();
-    DriveReverse(2.1, 45);
-    //DriveRotate(90);
+    DriveReverse(2.25, 45);
     Intake(0, 0);
-    wait(1000, timeUnits::msec);
-   // PIDGyroRotate(-135); // Buggy
-    DriveRotate(-265);
-/*if it doesn't work, gyro either makes robot spin forever, 
-or rotates to position then stops function altogether
-*/
+    wait(50, timeUnits::msec);
+    DriveRotate(-265); //This will rotate the robot to the left
+
+    //This portion will adjust any cubes that have not been intaked correctly
     Intake(-1, 45);
-    wait(500, timeUnits::msec);
+    wait(100, timeUnits::msec);
     Intake(1, 75); //adjust
     Intake(0, 0);
 
-    DriveFoward(.80, 30);
-
-    AnglerAuto(0, 2, 60); 
-
-    Intake(-1, 50);
+    //Thus will move the robot close to the goalzone and STACK 
+    DriveFoward(.75, 30);
+    AnglerAuto(0, 2, 80); 
+    Intake(1, 50);
     wait(500, timeUnits::msec);
-    Intake(-1, 30);
+    Intake(-1, 20);
+
 
     AnglerAuto(1, 0, 25); //stack
     Intake(0, 0);
-    DriveFoward(.2, 20);
+    DriveFoward(.15, 20);
     DriveReset();
     wait(500, timeUnits::msec);
     Intake(-1, 5);
-    DriveReverse(4, 100);
+
     Intake(0, 0);
- 
-   // Intake(-1, 5);
-   // AnglerAuto(-1, 0, 30); 
-    DriveReverse(2.5, 100);
+
+    //This portion of the code will position the robot
+    // so that it can get to the other side of the field 
+    DriveReverse(4, 100);
+    wait(500, timeUnits::msec);
     DriveRotate(120);
     DriveReverse(3, 100);
-    //
-    //Intake(0);
+
     
 
     /*
